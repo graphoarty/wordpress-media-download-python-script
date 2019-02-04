@@ -7,16 +7,16 @@
 # The writer of this script 'Quinston Pimenta' is not liable for
 #   the misuse of this script.
 
-import requests
-from bs4 import BeautifulSoup
 import os
 import time
-import urllib.parse
 import re
+import urllib.parse
+import requests
+from bs4 import BeautifulSoup
 
-website_url = 'http://your-wordpress-website.com'
-time_betweendownload_requests = 1 # second - use this to not wreck havoc on the website.
-output_directory = 'C:/Users/Quinston/Documents/output-directory'
+website_url = 'http://3dsignindia.com'
+time_between_download_requests = 1 # second - use this to not wreck havoc on the website.
+output_directory = 'C:/Users/Quinston/Documents/wordpress-media-download-python-script'
 
 ignore_sizes_regex = r'-\d+x\d+.[a-z]+'
 
@@ -55,6 +55,8 @@ def traverse_url_recursive(url, sleepTime=1):
                 and links.get_text() != 'Description' 
                 and links.get_text() != 'Parent Directory'):
                 
+                # time.sleep(sleepTime)
+
                 try:
                     traverse_url_recursive(urllib.parse.urljoin(url, links['href']))
                 except:
@@ -87,7 +89,7 @@ def traverse_url_recursive(url, sleepTime=1):
 
             print('There was an error opening the file.')
 
-traverse_url_recursive(urllib.parse.urljoin(website_url, 'wp-content/uploads/'), time_betweendownload_requests)
+traverse_url_recursive(urllib.parse.urljoin(website_url, 'wp-content/uploads/'), time_between_download_requests)
 
 
     
